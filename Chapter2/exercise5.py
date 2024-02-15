@@ -1,31 +1,19 @@
+A=[5,2,6,-9,8,9,10,-2]
 
-
-A=[31,41,59,26,41,58]
-B=[6,5,4,3,2,1]
-def insertion_sort(A):
+def two_sum(A):
     for i in range(len(A)):
-        j=i
-        while j>0 and A[j-1]>A[j]:
-            temp=A[j] #how people usually call this variable
-            A[j]=A[j-1]
-            A[j-1]=temp
-            j=j-1
+        for j in range(len(A)):
+            if i!=j and A[i]+A[j]==0:
+                return True
+    return False
+print(two_sum(A))
 
-
-    return A
-#print(insertion_sort(A))
-
-def insertion_decreasing(A):
-    for i in range(len(A)):
-        j=i
-        while j>0 and A[j]>A[j-1]:
-            mem=A[j]
-            A[j]=A[j-1]
-            A[j-1]=mem
-            j=j-1
-
-    return A
-#print(insertion_decreasing(A))
+def merge_sort(A,i,j):
+    if i<j:
+        m=(i+j)//2
+        merge_sort(A,i,m)
+        merge_sort(A,m+1,j)
+        merge(A,i,m,j)
 
 def merge(B,p,q,r):
     L=[]
@@ -65,12 +53,25 @@ def merge(B,p,q,r):
         smallest_r = smallest_r + 1
         k = k + 1
 
-def merge_sort(B,i,j):
-    if i<j:
-        m=(i+j)//2
-        merge_sort(B,i,m)
-        merge_sort(B,m+1,j)
-        merge(B,i,m,j)
-        print(B)
 
-merge_sort(B,0,len(B)-1)
+merge_sort(A, 0, len(A) - 1)
+print(A)
+def two_sum_binary(A):
+
+    for i in range(len(A)-1):
+        if binary_search(A,0,len(A)-1,-A[i]):
+            return True
+
+    return False
+def binary_search(A,left,right,x):
+        if left>right:
+            return False
+        m = (left + right) // 2
+        if A[m] == x:
+            return True
+        elif A[m] < x:
+            return binary_search(A, m + 1, right,x)
+        else:
+            return binary_search(A, left, m-1, x)
+
+print(two_sum_binary(A))
